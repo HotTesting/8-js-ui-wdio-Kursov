@@ -7,10 +7,6 @@ exports.config = {
     // WebdriverIO allows it to run your tests in arbitrary locations (e.g. locally or
     // on a remote machine).
     runner: 'local',
-    // Where selenium standalone or chrome driver started
-    // hostname: 'localhost',
-    // port: 4444,
-    path: '/',
     //
     // ==================
     // Specify Test Files
@@ -55,7 +51,7 @@ exports.config = {
         // 5 instances get started at a time.
         maxInstances: 5,
         //
-        browserName: 'chrome',
+        browserName: 'firefox',
         // If outputDir is provided WebdriverIO can capture driver session logs
         // it is possible to configure which logTypes to include/exclude.
         // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
@@ -108,7 +104,7 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['chromedriver'],
+    services: ['selenium-standalone'],
     
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
@@ -125,7 +121,7 @@ exports.config = {
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter.html
     reporters: ['spec'],
-    
+ 
     //
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
@@ -195,13 +191,14 @@ exports.config = {
      * afterEach in Mocha)
      */
     // afterHook: function () {
-    // },
+    // }, 
     /**
      * Function to be executed after a test (in Mocha/Jasmine) or a step (in Cucumber) starts.
      * @param {Object} test test details
      */
-    // afterTest: function (test) {
+    // afterTest: function(test) {
     // },
+
     /**
      * Hook that gets executed after the suite has ended
      * @param {Object} suite suite details
