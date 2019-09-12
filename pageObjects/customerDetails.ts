@@ -1,9 +1,4 @@
 export class CustomerDetails {
-    customerDetailsForm
-
-    constructor() {
-        this.customerDetailsForm = new CustomerDetailsForm()
-    }
 
     private get customerDetailsContainer() {
         return $('div[id=box-checkout-customer]')
@@ -14,7 +9,7 @@ export class CustomerDetails {
     }
 
     private get lastName() {
-        return $('input[name=lastname]')
+        return new Input($('input[name=lastname]'))
     }
 
     private get address1() {
@@ -47,6 +42,50 @@ export class CustomerDetails {
         } else {
             return false
         }
+    }
+
+    fillForm2(customerInfo) {
+        const testData = "test"
+        const emailData = `test${new Date().getTime() / 1000}@test.com`
+
+        this.firstName.click()
+        browser.pause(1000)
+        this.firstName.setValue(customerInfo.firstName)
+
+        this.lastName.type(testData)
+
+        this.address1.click()
+        browser.pause(1000)
+        this.address1.setValue(testData)
+
+        this.postalCode.click()
+        browser.pause(1000)
+        this.postalCode.setValue("12345")
+
+        this.city.click()
+        browser.pause(1000)
+        this.city.setValue(testData)
+
+        this.email.click()
+        browser.pause(1000)
+        this.email.setValue(emailData)
+
+        this.phone.click()
+        browser.pause(1000)
+        this.phone.setValue("123456789")
+
+        this.country.click()
+        browser.pause(1000)
+        browser.keys("u")
+        browser.keys("u")
+        browser.keys("Enter")
+
+        if(customerInfo.company) {
+            this.company.click()
+            browser.pause(1000)
+            this.company.setValue(emailData)
+        }
+
     }
 
     fillForm() {
@@ -90,6 +129,17 @@ export class CustomerDetails {
     }
 }
 
-class CustomerDetailsForm {
+class Input {
+    container
+
+    constructor(itemContainer) {
+        this.container = itemContainer
+    }
+
+    public type(value) {
+        this.container.click()
+        browser.pause(500)
+        this.container.setValue(value)
+    }
     
-};
+}

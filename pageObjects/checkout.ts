@@ -1,8 +1,11 @@
+import { CustomerDetails } from './customerDetails';
 export class Checkout {
-    shoppingCart
+    shoppingCart: ShoppingCart
+    customerDetails: CustomerDetails
 
     constructor() {
         this.shoppingCart = new ShoppingCart()
+        this.customerDetails = new CustomerDetails()
     }
 
     private get noItemsLabel() {

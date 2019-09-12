@@ -9,9 +9,10 @@
  - Use ChaiJS (expect, should or assert style) to make assertions
  */
 import { App } from '../../pageObjects/application';
- const chai =require('chai');
- const expect = chai.expect;
- chai.should();
+import { expect } from 'chai';
+ //const chai = require('chai');
+ //const expect = chai.expect;
+ //chai.should();
 
 // Each implemented test gives you 15 points
 describe("Order", function() {
@@ -41,8 +42,12 @@ describe("Order", function() {
         expect(productNameInCart).to.equal(productDetails.name)
         expect(productPriceInCart).to.equal(productDetails.price)
 
-        expect(App.customerDetails.isFormDisplayed()).to.be.true
-        App.customerDetails.fillForm()
+        App.checkout.customerDetails.fillForm
+        expect(App.checkout.customerDetails.isFormDisplayed()).to.be.true
+        App.checkout.customerDetails.fillForm2({
+            email: '',
+            lastName: ''
+        })
         browser.pause(1000)
 
         const paymentOfOrder = App.checkout.browsePaymentDue()
@@ -78,8 +83,8 @@ describe("Order", function() {
         expect(productNameInCart).to.equal(productDetails.name)
         expect(productPriceInCart).to.equal(productDetails.price)
 
-        expect(App.customerDetails.isFormDisplayed()).to.be.true
-        App.customerDetails.fillForm()
+        expect(App.checkout.customerDetails.isFormDisplayed()).to.be.true
+        App.checkout.customerDetails.fillForm()
         browser.pause(1000)
 
         const paymentOfOrder = App.checkout.browsePaymentDue()
@@ -115,8 +120,8 @@ describe("Order", function() {
         expect(productNameInCart).to.equal(productDetails.name)
         expect(productPriceInCart).to.equal(productDetails.price)
 
-        expect(App.customerDetails.isFormDisplayed()).to.be.true
-        App.customerDetails.fillForm()
+        expect(App.checkout.customerDetails.isFormDisplayed()).to.be.true
+        App.checkout.customerDetails.fillForm()
         browser.pause(1000)
 
         const paymentOfOrder = App.checkout.browsePaymentDue()
@@ -153,8 +158,8 @@ describe("Order", function() {
         expect(productNameInCart).to.equal(productDetails.name)
         expect(productPriceInCart).to.equal(productDetails.price)
 
-        expect(App.customerDetails.isFormDisplayed()).to.be.true
-        App.customerDetails.fillForm()
+        expect(App.checkout.customerDetails.isFormDisplayed()).to.be.true
+        App.checkout.customerDetails.fillForm()
         browser.pause(1000)
 
         const paymentOfOrder = App.checkout.browsePaymentDue()
@@ -206,8 +211,8 @@ describe("Order", function() {
         expect(productPriceInCartPositionSecond).to.equal(productDetails.price)
 
         //fill the fom and make order
-        expect(App.customerDetails.isFormDisplayed()).to.be.true
-        App.customerDetails.fillForm()
+        expect(App.checkout.customerDetails.isFormDisplayed()).to.be.true
+        App.checkout.customerDetails.fillForm()
         browser.pause(1000)
 
         const paymentOfOrder = App.checkout.browsePaymentDue()
@@ -280,8 +285,8 @@ describe("Order", function() {
         sum += productPriceInCartPositionThird
 
         //fill the fom and make order
-        expect(App.customerDetails.isFormDisplayed()).to.be.true
-        App.customerDetails.fillForm()
+        expect(App.checkout.customerDetails.isFormDisplayed()).to.be.true
+        App.checkout.customerDetails.fillForm()
         browser.pause(1000)
 
         const paymentOfOrder = App.checkout.browsePaymentDue()
