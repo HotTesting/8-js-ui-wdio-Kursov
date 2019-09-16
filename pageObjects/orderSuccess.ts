@@ -1,9 +1,4 @@
 export class OrderSuccess {
-orderCompleted
-
-    constructor() {
-        this.orderCompleted = new OrderComplited()
-    }
 
     public get isOrderSuccessContainerVisible() {
         const text = $('#box-order-success').getText()
@@ -24,8 +19,4 @@ orderCompleted
         }
         
     }
-}
-
-class OrderComplited {
-        
 }

@@ -8,6 +8,7 @@
  - Use mocha before/after hooks to reuse pre/post conditions
  - Use ChaiJS (expect, should or assert style) to make assertions
  */
+import { CustomerData } from '../../dataModels/CustomerInfoData'
 import { App } from '../../pageObjects/application';
  const chai =require('chai');
  const expect = chai.expect;
@@ -18,10 +19,12 @@ describe("Order", function() {
 
     beforeEach(function() {
         //browser.url('http://ip-5236.sunline.net.ua:38015/')
-        browser.reloadSession()
         browser.setWindowSize(1440, 800)
-        browser.pause(1000)
     });
+
+    afterEach(function() {
+        browser.reloadSession()
+    })
     
     it("is successful for regular item", function() {
         // http://ip-5236.sunline.net.ua:38015/rubber-ducks-c-1/red-duck-p-3
@@ -42,17 +45,15 @@ describe("Order", function() {
         expect(productPriceInCart).to.equal(productDetails.price)
 
         expect(App.customerDetails.isFormDisplayed()).to.be.true
-        App.customerDetails.fillForm()
-        browser.pause(1000)
+        App.customerDetails.fillForm(CustomerData)
 
         const paymentOfOrder = App.checkout.browsePaymentDue()
 
         expect(App.checkout.submitButton.isEnabled()).to.be.true
         App.checkout.submitButton.click()
-        browser.pause(1000)
+
         expect(App.checkout.confirmOrderButton.isEnabled()).to.be.true
         App.checkout.confirmOrderButton.click()
-        browser.pause(3000)
 
         expect(App.orderSuccess.isOrderSuccessContainerVisible).to.be.true
         console.log('orderTotalData = ', App.orderSuccess.orderTotal)
@@ -79,17 +80,15 @@ describe("Order", function() {
         expect(productPriceInCart).to.equal(productDetails.price)
 
         expect(App.customerDetails.isFormDisplayed()).to.be.true
-        App.customerDetails.fillForm()
-        browser.pause(1000)
+        App.customerDetails.fillForm(CustomerData)
 
         const paymentOfOrder = App.checkout.browsePaymentDue()
 
         expect(App.checkout.submitButton.isEnabled()).to.be.true
         App.checkout.submitButton.click()
-        browser.pause(1000)
+        
         expect(App.checkout.confirmOrderButton.isEnabled()).to.be.true
         App.checkout.confirmOrderButton.click()
-        browser.pause(3000)
 
         expect(App.orderSuccess.isOrderSuccessContainerVisible).to.be.true
         console.log('orderTotalData = ', App.orderSuccess.orderTotal)
@@ -116,17 +115,15 @@ describe("Order", function() {
         expect(productPriceInCart).to.equal(productDetails.price)
 
         expect(App.customerDetails.isFormDisplayed()).to.be.true
-        App.customerDetails.fillForm()
-        browser.pause(1000)
+        App.customerDetails.fillForm(CustomerData)
 
         const paymentOfOrder = App.checkout.browsePaymentDue()
 
         expect(App.checkout.submitButton.isEnabled()).to.be.true
         App.checkout.submitButton.click()
-        browser.pause(1000)
+        
         expect(App.checkout.confirmOrderButton.isEnabled()).to.be.true
         App.checkout.confirmOrderButton.click()
-        browser.pause(3000)
 
         expect(App.orderSuccess.isOrderSuccessContainerVisible).to.be.true
         console.log('orderTotalData = ', App.orderSuccess.orderTotal)
@@ -154,17 +151,15 @@ describe("Order", function() {
         expect(productPriceInCart).to.equal(productDetails.price)
 
         expect(App.customerDetails.isFormDisplayed()).to.be.true
-        App.customerDetails.fillForm()
-        browser.pause(1000)
+        App.customerDetails.fillForm(CustomerData)
 
         const paymentOfOrder = App.checkout.browsePaymentDue()
 
         expect(App.checkout.submitButton.isEnabled()).to.be.true
         App.checkout.submitButton.click()
-        browser.pause(1000)
+        
         expect(App.checkout.confirmOrderButton.isEnabled()).to.be.true
         App.checkout.confirmOrderButton.click()
-        browser.pause(3000)
 
         expect(App.orderSuccess.isOrderSuccessContainerVisible).to.be.true
         console.log('orderTotalData = ', App.orderSuccess.orderTotal)
@@ -207,17 +202,15 @@ describe("Order", function() {
 
         //fill the fom and make order
         expect(App.customerDetails.isFormDisplayed()).to.be.true
-        App.customerDetails.fillForm()
-        browser.pause(1000)
+        App.customerDetails.fillForm(CustomerData)
 
         const paymentOfOrder = App.checkout.browsePaymentDue()
 
         expect(App.checkout.submitButton.isEnabled()).to.be.true
         App.checkout.submitButton.click()
-        browser.pause(1000)
+        
         expect(App.checkout.confirmOrderButton.isEnabled()).to.be.true
         App.checkout.confirmOrderButton.click()
-        browser.pause(3000)
 
         expect(App.orderSuccess.isOrderSuccessContainerVisible).to.be.true
         console.log('orderTotalData = ', App.orderSuccess.orderTotal)
@@ -281,17 +274,15 @@ describe("Order", function() {
 
         //fill the fom and make order
         expect(App.customerDetails.isFormDisplayed()).to.be.true
-        App.customerDetails.fillForm()
-        browser.pause(1000)
+        App.customerDetails.fillForm(CustomerData)
 
         const paymentOfOrder = App.checkout.browsePaymentDue()
 
         expect(App.checkout.submitButton.isEnabled()).to.be.true
         App.checkout.submitButton.click()
-        browser.pause(1000)
+        
         expect(App.checkout.confirmOrderButton.isEnabled()).to.be.true
         App.checkout.confirmOrderButton.click()
-        browser.pause(3000)
 
         expect(App.orderSuccess.isOrderSuccessContainerVisible).to.be.true
         console.log('orderTotalData = ', App.orderSuccess.orderTotal)

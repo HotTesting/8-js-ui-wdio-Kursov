@@ -1,32 +1,29 @@
-export class CustomerDetails {
-    customerDetailsForm
 
-    constructor() {
-        this.customerDetailsForm = new CustomerDetailsForm()
-    }
+
+export class CustomerDetails {
 
     private get customerDetailsContainer() {
         return $('div[id=box-checkout-customer]')
     }
 
     private get firstName() {
-        return $('input[name=firstname]')
+        return new Input($('input[name=firstname]'))
     }
 
     private get lastName() {
-        return $('input[name=lastname]')
+        return new Input($('input[name=lastname]'))
     }
 
     private get address1() {
-        return $('input[name=address1]')
+        return new Input($('input[name=address1]'))
     }
 
     private get postalCode() {
-        return $('input[name=postcode]')
+        return new Input($('input[name=postcode]'))
     }
 
     private get city() {
-        return $('input[name=city]')
+        return new Input($('input[name=city]'))
     }
 
     private get country() {
@@ -34,11 +31,11 @@ export class CustomerDetails {
     }
 
     private get email() {
-        return $('input[name=email]')
+        return new Input($('input[name=email]'))
     }
 
     private get phone() {
-        return $('input[name=phone]')
+        return new Input($('input[name=phone]'))
     }
 
     isFormDisplayed() {
@@ -49,47 +46,32 @@ export class CustomerDetails {
         }
     }
 
-    fillForm() {
-        const testData = "test"
-        const emailData = `test${new Date().getTime() / 1000}@test.com`
-
-        this.firstName.click()
-        browser.pause(1000)
-        this.firstName.setValue(testData)
-
-        this.lastName.click()
-        browser.pause(1000)
-        this.lastName.setValue(testData)
-
-        this.address1.click()
-        browser.pause(1000)
-        this.address1.setValue(testData)
-
-        this.postalCode.click()
-        browser.pause(1000)
-        this.postalCode.setValue("12345")
-
-        this.city.click()
-        browser.pause(1000)
-        this.city.setValue(testData)
-
-        this.email.click()
-        browser.pause(1000)
-        this.email.setValue(emailData)
-
-        this.phone.click()
-        browser.pause(1000)
-        this.phone.setValue("123456789")
+    fillForm(CustomerData) {
+        this.firstName.type(CustomerData.firstName)
+        this.lastName.type(CustomerData.lastName)
+        this.address1.type(CustomerData.address1)
+        this.postalCode.type(CustomerData.postalCode)
+        this.city.type(CustomerData.city)
+        this.email.type(CustomerData.email)
+        this.phone.type(CustomerData.phone)
 
         this.country.click()
-        browser.pause(1000)
         browser.keys("u")
         browser.keys("u")
         browser.keys("Enter")
-
     }
 }
 
-class CustomerDetailsForm {
+class Input {
+    container
+
+    constructor(itemContainer) {
+        this.container = itemContainer
+    }
+
+    public type(value) {
+        this.container.click()
+        this.container.setValue(value)
+    }
     
-};
+}

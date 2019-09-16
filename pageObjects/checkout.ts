@@ -18,7 +18,9 @@ export class Checkout {
     }
 
     public get confirmOrderButton() {
-        return $('button[name=confirm_order]')
+        const buttonSelector = $('button[name=confirm_order]')
+        buttonSelector.waitForEnabled(1000, false, 'Expected button to became enabled')
+        return buttonSelector
     }
 
     browsePaymentDue() {
@@ -33,7 +35,8 @@ export class Checkout {
 
     open() {
         browser.url('/checkout')
-        browser.pause(2000)
+        //wait for invisibility of checkout loader
+        $(".loader").waitForDisplayed(5000, true, 'Expected checkout loader to became invisible')
     }
 
     isNoItemsInCart() {

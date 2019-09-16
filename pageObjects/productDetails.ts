@@ -1,8 +1,6 @@
 import { Header } from './components/header';
 import { Footer } from './components/footer';
 import { ProductDetailsModel } from '../dataModels/ProductDetails';
-// for example: http://ip-5236.sunline.net.ua:38015/rubber-ducks-c-1/blue-duck-p-4
-
 
 export class ProductDetails {
     header = new Header();
@@ -27,8 +25,12 @@ export class ProductDetails {
     }
 
     addToCart() {
+        const currentItemsInCart = this.header.getQuantity()
         $('button[name="add_cart_product"]').click()
-        browser.pause(5000)
+        browser.waitUntil(() => {
+            return this.header.getQuantity() > currentItemsInCart
+        }, null, `Expected items in cart to be changed. 
+        Current items: ${this.header.getQuantity()} items before ${currentItemsInCart}`)
     }
 
     isDiscount() {
@@ -51,8 +53,6 @@ export class ProductDetails {
                 console.log('Current price data = ', currentPriceData)
             }
         }
-        //return parseFloat($('#box-product').getAttribute('data-price'))
-        
     }
 
     public getProductName() {
