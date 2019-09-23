@@ -167,7 +167,7 @@ describe("Order", function() {
         expect(paymentOfOrder == parseFloat(App.orderSuccess.orderTotal))
     });
   
-    it.only("is successful for 2 different items in card", function() {
+    it("is successful for 2 different items in card", function() {
         //first duck check
         App.product.open('rubber-ducks-c-1/purple-duck-p-5')        
         let productDetailsFirst = App.product.getProductDetails()
