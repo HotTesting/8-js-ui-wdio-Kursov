@@ -1,4 +1,3 @@
-const assert = require('assert');
 /**
  - Try to implement as much tests as you can
  - Do not overload tests with logic, be simple
@@ -6,6 +5,8 @@ const assert = require('assert');
  - copy/paste is allowed
  - prefer css selectors
  */
+
+const assert = require('assert');
 
 // Each implemented test gives you 15 points (max total - 45)
    describe("Items search", function() {
@@ -15,7 +16,6 @@ const assert = require('assert');
         const searchInput = "duck"
         searchBar.setValue(searchInput)
         browser.keys("Enter")
-        browser.pause(5000)
 
         //result review
         const breadCrumbs = $('a[href="http://ip-5236.sunline.net.ua:38015/search"]')
@@ -23,33 +23,27 @@ const assert = require('assert');
         let searchResult = $$('.col-xs-6,.col-sm-4,col-md-3')
         console.log('got result length = ', searchResult.length);
         assert(searchResult.length > 0, 'Search result more than zero')
-        browser.pause(3000)
     });
   
     it("should redirect to item page in case only one result matches", function() {
         browser.url('http://ip-5236.sunline.net.ua:38015/')
-        browser.pause(2000)
         const searchBar = $('input[type=search]')
         const searchInput = "RD003"
         searchBar.setValue(searchInput)
         browser.keys("Enter")
-        browser.pause(5000)
 
         //result review
         const addCartButton = $('.btn[name=add_cart_product]')
         assert(addCartButton.isExisting(), 'Make sure this is a product page. Check add_to_cart button.')
         assert(addCartButton.isDisplayed(), 'add_to_cart button should be visible')
-        browser.pause(3000)
     });
   
     it("should redirect to 'no matching results' in case no items matched", function() {
         browser.url('http://ip-5236.sunline.net.ua:38015/')
-        browser.pause(2000)
         const searchBar = $('input[type=search]')
         const searchInput = "dog"
         searchBar.setValue(searchInput)
         browser.keys("Enter")
-        browser.pause(5000)
 
         //result review
         const breadCrumbs = $('a[href="http://ip-5236.sunline.net.ua:38015/search"]')
@@ -58,7 +52,6 @@ const assert = require('assert');
         const text = resultMessage.getText()
         console.log('got No result message ', text)
         assert(text.includes('No matching results'), 'Make sure this is a search result page with such text')
-        browser.pause(3000)
     });
   });  
   
@@ -70,21 +63,22 @@ const assert = require('assert');
         const searchInput = "duck"
         searchBar.setValue(searchInput)
         browser.keys("Enter")
-        browser.pause(5000)
         const priceSortButton = $(' a[href="http://ip-5236.sunline.net.ua:38015/search?query=duck&page=1&sort=price"]')
         priceSortButton.click()
-        browser.pause(3000)
 
         const searchResultArray = $$('.products strong , .products span')
-        let currentPrice = 0
+        let currentPrice : Number
+        currentPrice = 0
         for (let i = 0; i < searchResultArray.length; i++){
-            temp = searchResultArray[i].getText()
+            let temp = searchResultArray[i].getText()
             temp = temp.slice(1)
             console.log('MYTAG#1 search result item current price = ', temp);
-            if (currentPrice <= temp) {
-                currentPrice = temp
+            if (currentPrice <= parseInt(temp)) {
+                currentPrice = parseInt(temp)
+                console.log('MYTAG#1 current price = ', currentPrice);
             } else {
-                assert(currentPrice <= temp, 'current price sorting is wrong')
+                console.log('MYTAG#1 current price = ', currentPrice);
+                assert(currentPrice <= parseInt(temp), 'current price sorting is wrong')
             }
         }
     });
@@ -95,10 +89,8 @@ const assert = require('assert');
       const searchInput = "duck"
       searchBar.setValue(searchInput)
       browser.keys("Enter")
-      browser.pause(5000)
       const nameSortButton = $(' a[href="http://ip-5236.sunline.net.ua:38015/search?query=duck&page=1&sort=name"]')
       nameSortButton.click()
-      browser.pause(3000)
 
       const searchResultArray = $$('.name')
       let sortedArray = new Array();
@@ -133,9 +125,7 @@ const assert = require('assert');
         emailInput.setValue('test@gmail.com')
         subjectInput.setValue('Test subject')
         messageInput.setValue('Test message')
-        browser.pause(2000)
         sendButton.click()
-        browser.pause(2000)
 
         const successMessage = $('#notices .alert-success')
         assert(successMessage.isDisplayed(), 'message sent, success message should be visible')

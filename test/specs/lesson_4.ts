@@ -167,10 +167,10 @@ describe("Order", function() {
         expect(paymentOfOrder == parseFloat(App.orderSuccess.orderTotal))
     });
   
-    it("is successful for 2 different items in card", function() {
+    it.only("is successful for 2 different items in card", function() {
         //first duck check
         App.product.open('rubber-ducks-c-1/purple-duck-p-5')        
-        let productDetails = App.product.getProductDetails()
+        let productDetailsFirst = App.product.getProductDetails()
         App.product.addToCart()
         App.checkout.open()
         expect(App.checkout.isItemsInCart()).to.be.true
@@ -181,12 +181,12 @@ describe("Order", function() {
         console.log('productNameInCartPositionFirst', productNameInCartPositionFirst)
         console.log('productPriceInCartPositionFirst', productPriceInCartPositionFirst)
 
-        expect(productNameInCartPositionFirst).to.equal(productDetails.name)
-        expect(productPriceInCartPositionFirst).to.equal(productDetails.price)
+        expect(productNameInCartPositionFirst).to.equal(productDetailsFirst.name)
+        expect(productPriceInCartPositionFirst).to.equal(productDetailsFirst.price)
 
         //second duck check
         App.product.open('rubber-ducks-c-1/blue-duck-p-4')        
-        productDetails = App.product.getProductDetails()
+        let productDetailsSecond = App.product.getProductDetails()
         App.product.addToCart()
         App.checkout.open()
         expect(App.checkout.isItemsInCart()).to.be.true
@@ -197,8 +197,8 @@ describe("Order", function() {
         console.log('productNameInCartPositionSecond', productNameInCartPositionSecond)
         console.log('productPriceInCartPositionSecond', productPriceInCartPositionSecond)
 
-        expect(productNameInCartPositionSecond).to.equal(productDetails.name)
-        expect(productPriceInCartPositionSecond).to.equal(productDetails.price)
+        expect(productNameInCartPositionSecond).to.equal(productDetailsSecond.name)
+        expect(productPriceInCartPositionSecond).to.equal(productDetailsSecond.price)
 
         //fill the fom and make order
         expect(App.customerDetails.isFormDisplayed()).to.be.true
