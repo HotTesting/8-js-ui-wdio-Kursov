@@ -2,6 +2,7 @@ export class OrderSuccess {
 
     public get isOrderSuccessContainerVisible() {
         const text = $('#box-order-success').getText()
+        $('#box-order-success').waitForEnabled(1000, false, 'Expected success block to became visible')
         if (text.includes('successfully completed')) {
             return true
         } else {

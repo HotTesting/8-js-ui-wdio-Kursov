@@ -19,7 +19,7 @@ export class Checkout {
 
     public get confirmOrderButton() {
         const buttonSelector = $('button[name=confirm_order]')
-        buttonSelector.waitForEnabled(1000, false, 'Expected button to became enabled')
+        buttonSelector.waitForEnabled(2000, false, 'Expected button to became enabled')
         return buttonSelector
     }
 
